@@ -1,12 +1,14 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.4'
 	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+	id 'maven-publish'
 	id 'java'
-        id 'maven-publish'
+
 }
 
-group = 'com.ibm'
-version = '1.0'
+group = 'com.ibm.service'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -14,45 +16,37 @@ configurations {
 	}
 }
 
-publishing {
+publishing{
+	publications{
+		maven(MavenPublication){
+			groupId='com.ibm.service'
+			artifactId='loginservice'
+			version='0.1'
+		}
+	}
 
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/vishwanath-puranik/moves-gh-actions"
-      credentials {
-        username = System.getenv("GH_ACTOR")
-        password = System.getenv("GH_TOKEN")
-      }
-    }
-  }
-
-        publications {
-            gpr(MavenPublication) {
-                from components.java
-            }
-        }
-
-
+	repositories {
+		maven {
+			name="loginRepo"
+			url="https://github.com/vishwanath-puranik/moves-gh-actions"
+			credentials{
+				username=System.getenv("GH_ACTOR")
+				password=System.getenv("GH_TOKEN")
+			}
+		}
+	}
 }
 
 repositories {
-//	mavenCentral()
-maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/vishwanath-puranik/moves-gh-actions"
-      credentials {
-        username = System.getenv("GH_ACTOR")
-        password = System.getenv("GH_TOKEN")
-      }
-    }
-
+	mavenCentral()
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 //	implementation 'org.hibernate.orm:hibernate-core:6.1.4.Final'
 	implementation 'org.postgresql:postgresql'
 	compileOnly 'org.projectlombok:lombok'
@@ -61,6 +55,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-//tasks.register('publish') {
+//tasks.named('test') {
 //	useJUnitPlatform()
 //}
