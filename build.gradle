@@ -28,7 +28,7 @@ publishing{
 	repositories {
 		maven {
 			name="loginRepo"
-			url="https://github.com/vishwanath-puranik/moves-gh-actions"
+			url="https://maven.pkg.github.com/vishwanath-puranik/moves-gh-actions"
 			credentials{
 				username=System.getenv("GITHUB_ACTOR")
 				password=System.getenv("GITHUB_TOKEN")
