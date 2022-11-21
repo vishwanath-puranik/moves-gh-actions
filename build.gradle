@@ -37,7 +37,16 @@ publishing {
 }
 
 repositories {
-	mavenCentral()
+\\	mavenCentral()
+maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/vishwanath-puranik/moves-gh-actions"
+      credentials {
+        username = System.getenv("GH_ACTOR")
+        password = System.getenv("GH_TOKEN")
+      }
+    }
+
 }
 
 dependencies {
