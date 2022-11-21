@@ -37,7 +37,7 @@ publishing {
 }
 
 repositories {
-\\	mavenCentral()
+//	mavenCentral()
 maven {
       name = "GitHubPackages"
       url = "https://maven.pkg.github.com/vishwanath-puranik/moves-gh-actions"
