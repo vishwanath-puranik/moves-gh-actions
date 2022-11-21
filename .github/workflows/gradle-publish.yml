@@ -43,5 +43,5 @@ jobs:
       with:
         arguments: publish
       env:
-        USERNAME: ${{ github.actor }}
+        username: ${{ github.actor }}
         password: ${{ secrets.G_TOKEN }}
