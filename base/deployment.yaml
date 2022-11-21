@@ -1,0 +1,48 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: servicelogin-vault
+  namespace: test
+  annotations:
+  labels:
+    app: servicelogin-vault
+    app.kubernetes.io/component: servicelogin-vault
+    app.kubernetes.io/instance: servicelogin-vault
+    app.kubernetes.io/name: servicelogin-vault
+    app.kubernetes.io/part-of: service-login-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servicelogin-vault
+  template:
+    metadata:
+      annotations: 
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'issues'
+        vault.hashicorp.com/agent-inject-secret-config: 'secret/data/issues/config'
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{- with secret "secret/data/issues/config" -}}
+          export SPRING_DATASOURCE_USERNAME="{{ .Data.data.dbuser }}"
+          export SPRING_DATASOURCE_PASSWORD="{{ .Data.data.dbpwd }}"
+          {{- end -}}
+      labels:
+        app: servicelogin-vault
+        deployment: servicelogin-vault
+    spec:
+      serviceAccountName: issues
+      containers:
+        - name: servicelogin-vault
+          image: >-
+            quay.io/vishwanath_puranik/slogin
+          command: ['sh', '-c']
+          args: ['source /vault/secrets/config && echo $SPRING_DATASOURCE_USERNAME && sleep 600']
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: >-
+                jdbc:postgresql://172.30.50.249:5432/moves?createDatabaseIfNotExist=true
+            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+              value: org.postgresql.Driver
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
+
