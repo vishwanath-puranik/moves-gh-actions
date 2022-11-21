@@ -28,9 +28,9 @@ publishing {
   }
 }
 
-\\repositories {
-\\	mavenCentral()
-\\}
+//repositories {
+//	mavenCentral()
+//}
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -44,6 +44,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.register('publish') {
+//tasks.register('publish') {
 //	useJUnitPlatform()
-}
+//}
