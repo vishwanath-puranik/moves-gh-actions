@@ -45,5 +45,9 @@ jobs:
     - name: Retrieve saved Docker image
       uses: actions/download-artifact@v2
       with:
-        name: app-jar
+        name: app-jar2
+        path: build/libs
+
+    - name: Display downloaded files
+      run: ls -lrt
         path: build/libs
