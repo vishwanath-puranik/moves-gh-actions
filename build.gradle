@@ -30,7 +30,7 @@ publishing{
 			url="https://github.com/vishwanath-puranik/moves-gh-actions"
 			credentials{
 				username='vishwanath-puranik'
-				password='Esprit66$$'
+				password='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'
 			}
 		}
 	}
