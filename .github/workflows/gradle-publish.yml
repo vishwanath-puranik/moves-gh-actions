@@ -49,5 +49,4 @@ jobs:
         path: build/libs
 
     - name: Display downloaded files
-      run: ls -lrt
-        path: build/libs
+      run: ls -lrt build/libs/
