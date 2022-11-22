@@ -97,6 +97,10 @@ jobs:
       run: |
           echo ${{steps.build-and-push.outputs.digest}}
 
+          sed -i 's/DIGEST/${{steps.build-and-push.outputs.digest}}/g' ./dev/patch.yaml
+
+    
+
   kustomize:
     needs: gradle-build
     runs-on: ubuntu-latest
