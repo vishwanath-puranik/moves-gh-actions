@@ -1,0 +1,9 @@
+resources:
+ - ../base/
+ 
+generatorOptions:
+ disableNameSuffixHash: true
+
+patchesStrategicMerge:
+ - patch.yaml
+
