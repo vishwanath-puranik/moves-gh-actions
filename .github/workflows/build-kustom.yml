@@ -111,20 +111,8 @@ jobs:
             git config --global user.email "vishwanath.puranik@ibm.com"
 
 
-            git branch -r | tail -2 | head -1 > test.txt
-
-            cat test.txt
-
-            sed -i 's/  origin\/dev//g' test.txt
-
-            i=`cat test.txt`; i=$((i+1)) ; echo $i;
-
             git add .
 
-            git commit -m "committed from tekton task"
+            git commit -m "committed from gh actions"
 
-            git branch dev$i
-
-            git checkout dev$i
-
-            git push --set-upstream origin dev$i
+            git push 
