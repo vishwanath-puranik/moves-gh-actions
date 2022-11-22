@@ -95,7 +95,7 @@ jobs:
 
     - name: 'get image digest'
       run: |
-          echo ${{needs.build-and-push.outputs.digest}}
+          echo ${{steps.build-and-push.outputs.digest}}
 
   kustomize:
     needs: gradle-build
