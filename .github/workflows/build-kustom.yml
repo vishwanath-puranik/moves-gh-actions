@@ -114,7 +114,7 @@ jobs:
         with:
           kustomize_version: '3.0.0'
           kustomize_build_dir: './dev'
-          kustomize_output_file: "gitops/dev/rendered.yaml"
+          kustomize_output_file: "gitops/dev/rendered1.yaml"
 
       - name: Github Update
         run: |
