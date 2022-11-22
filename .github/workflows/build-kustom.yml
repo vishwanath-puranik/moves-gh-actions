@@ -101,33 +101,23 @@ jobs:
 
           cat ./dev/patch.yaml
 
+    - name: 'Kustomize Build'
+      uses: karancode/kustomize-github-action@master
+      with:
+        kustomize_version: '3.0.0'
+        kustomize_build_dir: './dev'
+        kustomize_output_file: "gitops/dev/rendered.yaml"
+
+    - name: Github Update
+      run: |
+          git config --global user.name "Vishwanath-puranik"
+
+          git config --global user.email "vishwanath.puranik@ibm.com"
 
 
-    
+          git add .
 
-  kustomize:
-    needs: gradle-build
-    runs-on: ubuntu-latest
-    steps:
-      
-
-      - name: 'Kustomize Build'
-        uses: karancode/kustomize-github-action@master
-        with:
-          kustomize_version: '3.0.0'
-          kustomize_build_dir: './dev'
-          kustomize_output_file: "gitops/dev/rendered.yaml"
-
-      - name: Github Update
-        run: |
-            git config --global user.name "Vishwanath-puranik"
-
-            git config --global user.email "vishwanath.puranik@ibm.com"
-
-
-            git add .
-
-            git commit -m "committed from gh task"
+          git commit -m "committed from gh task"
 
 
             git push 
