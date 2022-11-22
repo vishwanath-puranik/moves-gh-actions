@@ -93,9 +93,9 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-      - name: 'get image digest'
-        run: |
-            echo ${{needs.build-and-push.outputs.digest}}
+    - name: 'get image digest'
+      run: |
+          echo ${{needs.build-and-push.outputs.digest}}
 
   kustomize:
     needs: gradle-build
