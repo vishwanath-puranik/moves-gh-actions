@@ -99,6 +99,10 @@ jobs:
 
           sed -i 's/DIGEST/${{steps.build-and-push.outputs.digest}}/g' ./dev/patch.yaml
 
+          cat ./dev/patch.yaml
+
+
+
     
 
   kustomize:
