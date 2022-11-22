@@ -55,7 +55,7 @@ jobs:
         path: build/libs
 
     - name: Display downloaded files
-      run: ls -lrt
+      run: ls -lrt build/libs
 
   container-image-build:
 
