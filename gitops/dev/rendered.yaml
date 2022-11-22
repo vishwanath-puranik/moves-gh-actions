@@ -43,6 +43,6 @@ spec:
           value: org.postgresql.Driver
         - name: SPRING_JPA_HIBERNATE_DDL_AUTO
           value: update
-        image: quay.io/vishwanath_puranik/slogin@DIGEST
+        image: quay.io/vishwanath_puranik/slogin@sha256:25e8583285d22df5ef760abd2d5e7191db9e35a63852fbe8d2b2fd7be8373324
         name: servicelogin-vault2
       serviceAccountName: issues
