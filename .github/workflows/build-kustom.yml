@@ -110,7 +110,7 @@ jobs:
 
     - name: Github Update
       run: |
-          git config --global user.name "Vishwanath-puranik"
+          git config --global user.name "vishwanath-puranik"
 
           git config --global user.email "vishwanath.puranik@ibm.com"
 
@@ -118,6 +118,10 @@ jobs:
           git add .
 
           git commit -m "committed from gh task"
+          
+          git branch dev
+          
+          git checkout dev
 
 
-            git push 
+          git push --set-upstream origin dev
