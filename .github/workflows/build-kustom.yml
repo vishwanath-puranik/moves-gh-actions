@@ -63,7 +63,21 @@ jobs:
       run: ls -lrt build/libs
 
 
+  build-image:
+    needs: gradle-build
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@master
 
+    - name: Retrieve saved Docker image
+      uses: actions/download-artifact@v2
+      with:
+        name: app-jar
+        path: build/libs
+
+    - name: Display downloaded files
+      run: ls -lrt build/libs
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
     - name: Setup Docker buildx
@@ -101,17 +115,12 @@ jobs:
     - name: 'get image digest'
       run: |
           echo ${{steps.build-and-push.outputs.digest}}
-
           sed -i 's/DIGEST/${{steps.build-and-push.outputs.digest}}/g' ./dev/patch.yaml
-
           cat ./dev/patch.yaml
-
-
-
     
 
   kustomize:
-    needs: gradle-build
+    needs: build-image
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -123,7 +132,7 @@ jobs:
         with:
           kustomize_version: '3.0.0'
           kustomize_build_dir: './dev'
-          kustomize_output_file: "gitops/dev/rendered1.yaml"
+          kustomize_output_file: "gitops/dev/rendered.yaml"
 
      # - name: Github Update
       #  run: |
