@@ -92,6 +92,7 @@ jobs:
         labels: ${{ steps.meta.outputs.labels }}
 
   kustomize:
+    needs: gradle-build
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -102,3 +103,28 @@ jobs:
           kustomize_version: '3.0.0'
           kustomize_build_dir: './dev'
           kustomize_output_file: "gitops/dev/rendered.yaml"
+
+      - name: Github Update
+        run: |
+            git config --global user.name "Vishwanath-puranik"
+
+            git config --global user.email "vishwanath.puranik@ibm.com"
+
+
+            git branch -r | tail -2 | head -1 > test.txt
+
+            cat test.txt
+
+            sed -i 's/  origin\/dev//g' test.txt
+
+            i=`cat test.txt`; i=$((i+1)) ; echo $i;
+
+            git add .
+
+            git commit -m "committed from tekton task"
+
+            git branch dev$i
+
+            git checkout dev$i
+
+            git push --set-upstream origin dev$i
