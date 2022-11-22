@@ -7,14 +7,6 @@
 
 name: Gradle Package
 
-env:
-  # 🖊️ EDIT your repository secrets to log into your OpenShift cluster and set up the context.
-  # See https://github.com/redhat-actions/oc-login#readme for how to retrieve these values.
-  # To get a permanent token, refer to https://github.com/redhat-actions/oc-login/wiki/Using-a-Service-Account-for-GitHub-Actions
-  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
-  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
-  # 🖊️ EDIT to set the kube context's namespace after login. Leave blank to use your user's default namespace.
-  OPENSHIFT_NAMESPACE: "test"
 
 on:
   push:
@@ -27,6 +19,10 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
+
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "test"
 
 jobs:
   gradle-build:
