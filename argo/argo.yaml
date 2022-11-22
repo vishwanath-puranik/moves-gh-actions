@@ -11,5 +11,5 @@ spec:
   source:
     path: ./gitops/dev
     repoURL: 'https://github.com/vishwanath-puranik/moves-gh-actions.git'
-    targetRevision: master
+    targetRevision: HEAD
 
