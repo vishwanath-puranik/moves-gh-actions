@@ -100,7 +100,7 @@ jobs:
       
       - name: 'get image digest'
         run: |
-            echo ${{needs.build-image.outputs.Digest}}
+            echo ${{needs.gradle-build.outputs.Digest}}
             
       - name: 'Kustomize Build'
         uses: karancode/kustomize-github-action@master
