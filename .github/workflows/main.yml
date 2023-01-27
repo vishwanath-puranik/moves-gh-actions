@@ -1,0 +1,41 @@
+name: .NET
+
+on:
+  workflow_dispatch:
+  #push:
+    #branches: [ "master" ]
+  #pull_request:
+  #  types:
+  #    - opened
+  #  branches: [ "master" ]
+  #pull_request_target:
+  #  branches: [ "master" ]
+  #  types:
+  #    - closed
+    
+env:
+  REGISTRY: goaaroregistry.azurecr.io
+  APP: DLHAPI
+  APP-IMAGE: dlh-api-test
+  GIT_DEPLOY_REPO: dlh-api-test-manifests
+  GH_TOKEN: ${{ github.token }}
+
+  eOPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  eOPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: "dlh-dev"
+  HELM_RELEASE_NAME: dlh-api-test-runner
+  
+
+jobs:
+  fetch:
+    name: Code checkout
+    #if: github.event_name == 'pull_request'
+    #if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'dev')
+ 
+    runs-on: ubuntu-latest
+    #environment: 
+    #  name: Dev
+    steps:
+    - name: SQL step
+      run: |
+          sqlcmd -S 169.55.186.119,9443 -U sa -P Sql2019isfast -i test.sql
