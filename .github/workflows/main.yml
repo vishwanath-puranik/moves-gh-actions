@@ -36,6 +36,9 @@ jobs:
     #environment: 
     #  name: Dev
     steps:
+    - name: Checkout git repository
+      id: checkout1
+      uses: actions/checkout@v3
     - name: SQL step
       run: |
           sqlcmd -S 169.55.186.119,9443 -U sa -P Sql2019isfast -i test.sql
