@@ -36,4 +36,6 @@ jobs:
         #severity-cutoff: critical
     - name: Inspect action SARIF report
       run: cat ${{ steps.scan.outputs.sarif }}
-           
+    - uses: anchore/scan-action/download-grype@v3
+      id: grype
+    - run: ${{steps.grype.outputs.cmd}} mcr.microsoft.com/dotnet/aspnet:6.0
