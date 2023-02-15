@@ -38,3 +38,10 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: ${{ steps.scan.outputs.sarif }}
+    - name: Download vulnerability report
+      uses: github/codeql-action/download-sarif@v2
+    - name: cat sarif report
+      run : |
+        ls -lrt
+        cat *.sarif
+           
