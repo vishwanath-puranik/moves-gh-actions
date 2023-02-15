@@ -38,4 +38,4 @@ jobs:
       run: cat ${{ steps.scan.outputs.sarif }}
     - uses: anchore/scan-action/download-grype@v3
       id: grype
-    - run: ${{steps.grype.outputs.cmd}} mcr.microsoft.com/dotnet/aspnet:6.0
+    - run: ${{steps.grype.outputs.cmd}} -q mcr.microsoft.com/dotnet/aspnet:6.0
